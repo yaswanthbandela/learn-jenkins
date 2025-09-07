@@ -1,14 +1,13 @@
 pipeline {
     agent any
     options {
-        timeout(time: 1, unit: 'SECONDS') 
+        timeout(time: 30, unit: 'Minutes') 
     }
     stages {
         stage('Build') {
             steps {
                 sh '''
                 echo "Hello, This is Build stage"
-                sleep 10
                 '''
             }
         }
