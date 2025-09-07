@@ -10,6 +10,7 @@ pipeline {
                 sh '''
                 echo "Hello, This is Build stage"
                 echo Testing github webhook integration
+                echo Testing github webhook integration 2
                 '''
             }
         }
