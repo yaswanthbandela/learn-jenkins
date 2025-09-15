@@ -3,6 +3,7 @@ pipeline {
     options {
         timeout(time: 30, unit: 'MINUTES')
         disableConcurrentBuilds()
+        ansiColor('xterm')
     }
     stages {
         stage('Build') {
@@ -31,6 +32,7 @@ pipeline {
     post {
         always {
             echo 'This will run always'
+            deleteDir()
         }
         success {
             echo 'This will run only if successful'
