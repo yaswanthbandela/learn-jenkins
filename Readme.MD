@@ -29,10 +29,12 @@ sudo systemctl start jenkins
 ```
 
 ### Verify Installation
-Open Jenkins in your browser:  
-👉 `http://<your-server-ip>:8080`  
 
-Unlock Jenkins using the initial admin password:  
+Open Jenkins in your browser:  
+👉 `http://<your-server-ip>:8080`
+
+Unlock Jenkins using the initial admin password:
+
 ```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
@@ -43,25 +45,29 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 Our pipelines depend on the following plugins:
 
-| Plugin Name               | Purpose                                                                 |
-|----------------------------|-------------------------------------------------------------------------|
-| **AnsiColor**             | Enables colored console output for better readability.                  |
-| **Pipeline Utility Steps** | Provides utility steps (JSON, CSV, file, ZIP handling) for pipelines.  |
-| **Pipeline Stage View**   | Adds visualization of stages and branches in the pipeline UI.           |
+| Plugin Name                  | Purpose                                                               |
+| ---------------------------- | --------------------------------------------------------------------- |
+| **AnsiColor**                | Enables colored console output for better readability.                |
+| **Pipeline Utility Steps**   | Provides utility steps (JSON, CSV, file, ZIP handling) for pipelines. |
+| **Pipeline Stage View**      | Adds visualization of stages and branches in the pipeline UI.         |
+| **Nexus Artifacts Uploader** | To Upload Artifacts on to nexus.                                      |
 
 ---
 
 ## 3. Installing Plugins
 
 ### Option A: Jenkins UI
-1. Go to **Manage Jenkins** → **Plugins** → **Available Plugins**.  
+
+1. Go to **Manage Jenkins** → **Plugins** → **Available Plugins**.
 2. Search and install:
    - `AnsiColor`
    - `Pipeline Utility Steps`
-   - `Pipeline Stage View`  
+   - `Pipeline Stage View`
+   - `Nexus Artifacts Uploader`
 3. Restart Jenkins if prompted.
 
 ### Option B: Jenkins CLI
+
 ```bash
 # Download Jenkins CLI
 wget http://<jenkins-server>:8080/jnlpJars/jenkins-cli.jar
@@ -70,6 +76,7 @@ wget http://<jenkins-server>:8080/jnlpJars/jenkins-cli.jar
 java -jar jenkins-cli.jar -s http://<jenkins-server>:8080 install-plugin ansicolor
 java -jar jenkins-cli.jar -s http://<jenkins-server>:8080 install-plugin pipeline-utility-steps
 java -jar jenkins-cli.jar -s http://<jenkins-server>:8080 install-plugin pipeline-stage-view
+java -jar jenkins-cli.jar -s http://<jenkins-server>:8080 install-plugin nexus-artifacts-uploader
 
 # Restart Jenkins
 java -jar jenkins-cli.jar -s http://<jenkins-server>:8080 safe-restart
@@ -78,9 +85,11 @@ java -jar jenkins-cli.jar -s http://<jenkins-server>:8080 safe-restart
 ---
 
 ## 4. Verify Plugins
-After Jenkins restarts:  
-- Go to **Manage Jenkins** → **Plugins** → **Installed Plugins**.  
-- Confirm the required plugins are listed and enabled.  
+
+After Jenkins restarts:
+
+- Go to **Manage Jenkins** → **Plugins** → **Installed Plugins**.
+- Confirm the required plugins are listed and enabled.
 
 ---
 
