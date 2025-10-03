@@ -12,9 +12,9 @@ pipeline {
         NEXUS_URL = 'localhost:8081'
         NEXUS_REPOSITORY_ID = 'backend-1'
         NEXUS_GROUP_ID = 'com.expense'
-        NEXUS_VERSION = ''
+        def NEXUS_VERSION = ''
         NEXUS_ARTIFACT_ID = 'backend'
-        ARTIFACT_FILE_NAME = ''
+        def ARTIFACT_FILE_NAME = ''
         
         // This is the ID of your Jenkins Credentials (Username with password)
         NEXUS_CREDENTIALS_ID = 'nexus-auth'
@@ -38,11 +38,11 @@ pipeline {
             steps {
                 script {
                     def packageJson = readJSON file: 'package.json'
-                    def appVersion = packageJson.version.toString()
+                    def appVersion = packageJson.version
                     echo "Application version: ${appVersion}"
                     
-                    env.NEXUS_VERSION = appVersion
-                    env.ARTIFACT_FILE_NAME = "${env.NEXUS_ARTIFACT_ID}-${env.NEXUS_VERSION}.zip"
+                    NEXUS_VERSION = appVersion
+                    ARTIFACT_FILE_NAME = "${env.NEXUS_ARTIFACT_ID}-${NEXUS_VERSION}.zip"
                     
                     echo "Application version: ${env.NEXUS_VERSION}"
                     echo "Artifact file name: ${env.ARTIFACT_FILE_NAME}"
