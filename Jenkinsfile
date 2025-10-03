@@ -12,9 +12,9 @@ pipeline {
         NEXUS_URL = 'localhost:8081'
         NEXUS_REPOSITORY_ID = 'backend-1'
         NEXUS_GROUP_ID = 'com.expense'
-        def NEXUS_VERSION = ''
+        // NEXUS_VERSION = ''
         NEXUS_ARTIFACT_ID = 'backend'
-        def ARTIFACT_FILE_NAME = ''
+        // ARTIFACT_FILE_NAME = ''
         
         // This is the ID of your Jenkins Credentials (Username with password)
         NEXUS_CREDENTIALS_ID = 'nexus-auth'
