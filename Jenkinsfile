@@ -39,7 +39,7 @@ pipeline {
             steps{
                 script{
                     def packageJson = readJSON file: 'package.json'
-                    env.appVersion = packageJson.version
+                    def appVersion = packageJson.version
                     echo "application version: ${env.appVersion}"
                     env.NEXUS_VERSION = env.appVersion
                     env.ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${env.NEXUS_VERSION}.zip"
@@ -50,8 +50,8 @@ pipeline {
         }
         stage('Testing') {
             steps {
-                sh "echo env.NEXUS_VERSION"
-                sh "echo env.ARTIFACT_FILE_NAME"
+                sh "echo ${env.NEXUS_VERSION}"
+                sh "echo ${env.ARTIFACT_FILE_NAME}"
                 // Add your test commands here, e.g., sh 'npm test'
             }
         }
