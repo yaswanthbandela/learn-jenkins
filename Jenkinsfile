@@ -42,7 +42,8 @@ pipeline {
                     def appVersion = packageJson.version
                     echo "application version: ${appVersion}"
                     env.NEXUS_VERSION = appVersion
-                    env.ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${env.NEXUS_VERSION}.zip"
+                    env.ARTIFACT_FILE_NAME = "${env.NEXUS_ARTIFACT_ID}-${env.NEXUS_VERSION}.zip"
+                    
                     echo "application version: ${env.NEXUS_VERSION}"
                     echo "Artifact file name: ${env.ARTIFACT_FILE_NAME}"
                 }
