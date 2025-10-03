@@ -16,7 +16,7 @@ pipeline {
          NEXUS_VERSION = ""
 
          NEXUS_ARTIFACT_ID = 'backend'
-         ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${NEXUS_VERSION}.zip" 
+         ARTIFACT_FILE_NAME = "" 
         
         // This is the ID of your Jenkins Credentials (Username with password)
         NEXUS_CREDENTIALS_ID = 'nexus-auth' 
@@ -42,14 +42,15 @@ pipeline {
                     env.appVersion = packageJson.version
                     echo "application version: ${env.appVersion}"
                     env.NEXUS_VERSION = env.appVersion
+                    env.ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${env.NEXUS_VERSION}.zip"
                     echo "application version: ${env.NEXUS_VERSION}"
                 }
             }
         }
         stage('Testing') {
             steps {
-                sh 'echo env.NEXUS_VERSION'
-                sh 'echo env.ARTIFACT_FILE_NAME'
+                sh "echo env.NEXUS_VERSION"
+                sh "echo env.ARTIFACT_FILE_NAME"
                 // Add your test commands here, e.g., sh 'npm test'
             }
         }
