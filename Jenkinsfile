@@ -16,7 +16,7 @@ pipeline {
          NEXUS_VERSION = "1.0.${env.BUILD_NUMBER}"
 
          NEXUS_ARTIFACT_ID = 'backend'
-         ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${NEXUS_VERSION}.tgz" 
+         ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${NEXUS_VERSION}.zip" 
         
         // This is the ID of your Jenkins Credentials (Username with password)
         NEXUS_CREDENTIALS_ID = 'nexus-auth' 
@@ -50,7 +50,7 @@ pipeline {
                             [artifactId: NEXUS_ARTIFACT_ID,
                                 classifier: '',
                                 file: ARTIFACT_FILE_NAME,
-                                type: 'tgz']
+                                type: 'zip']
                         ]
                         )
                 }
