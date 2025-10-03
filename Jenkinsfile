@@ -1,10 +1,11 @@
 pipeline {
-        agent {
-        docker {
-            image 'node:20-alpine'
-            args '-u root' // Use root if needed for permissions inside the container
-        }
-    }
+        agent any
+    //     {
+    //     docker {
+    //         image 'node:20-alpine'
+    //         args '-u root' // Use root if needed for permissions inside the container
+    //     }
+    // }
     
     environment {
         // Replace with your actual Nexus URL and repository name

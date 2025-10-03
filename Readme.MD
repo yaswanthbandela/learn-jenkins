@@ -51,6 +51,7 @@ Our pipelines depend on the following plugins:
 | **Pipeline Utility Steps**   | Provides utility steps (JSON, CSV, file, ZIP handling) for pipelines. |
 | **Pipeline Stage View**      | Adds visualization of stages and branches in the pipeline UI.         |
 | **Nexus Artifacts Uploader** | To Upload Artifacts on to nexus.                                      |
+| **Docker Pipeline**          | To Run agent as Docker.                                               |
 
 ---
 
@@ -64,6 +65,7 @@ Our pipelines depend on the following plugins:
    - `Pipeline Utility Steps`
    - `Pipeline Stage View`
    - `Nexus Artifacts Uploader`
+   - `Docker Pipeline`
 3. Restart Jenkins if prompted.
 
 ### Option B: Jenkins CLI
