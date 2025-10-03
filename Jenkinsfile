@@ -57,10 +57,18 @@ pipeline {
                 // Add your test commands here, e.g., sh 'npm test'
             }
         }
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
                 sh """
                 ls -ltr
+                npm install
+                """
+            }
+        }
+        stage('App Packaging') {
+            steps {
+                sh """
+                zip -r -q ${env.ARTIFACT_FILE_NAME} * -x Jenkinsfile* -x *.zip -x *.git*
                 """
             }
         }
