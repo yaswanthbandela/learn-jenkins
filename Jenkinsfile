@@ -47,8 +47,8 @@ pipeline {
         }
         stage('Testing') {
             steps {
-                echo NEXUS_VERSION
-                echo ARTIFACT_FILE_NAME
+                echo env.NEXUS_VERSION
+                echo env.ARTIFACT_FILE_NAME
                 // Add your test commands here, e.g., sh 'npm test'
             }
         }
