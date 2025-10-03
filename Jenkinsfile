@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     def packageJson = readJSON file: 'package.json'
-                    def appVersion = packageJson.version
+                    def appVersion = packageJson.version.toString()
                     echo "Application version: ${appVersion}"
                     
                     env.NEXUS_VERSION = appVersion
