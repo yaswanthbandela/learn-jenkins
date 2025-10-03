@@ -1,34 +1,32 @@
 pipeline {
-    agent any
+        agent {
+        docker {
+            image 'node:20-alpine'
+            args '-u root' // Use root if needed for permissions inside the container
+        }
+    }
+    
+    environment {
+        // Replace with your actual Nexus URL and repository name
+        NEXUS_URL = 'http://localhost:8081/repository/backend-1/' 
+        // These should be configured as Jenkins Credentials (Secret Text)
+        NEXUS_USERNAME = credentials('nexus-username-id') 
+        NEXUS_PASSWORD = credentials('nexus-password-id') 
+        
+        // Assuming your artifact is a simple tarball of the built app
+        ARTIFACT_NAME = "my-nodejs-app-${env.BUILD_NUMBER}.tgz" 
+    }
     options {
         timeout(time: 30, unit: 'MINUTES')
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-    parameters { 
-        choice(name: 'Action', choices: ['Apply', 'Destroy'], description: 'Choose one') 
-        }
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh '''
-                echo "Hello, This is Build stage"
-                echo Testing github webhook integration
-                echo Testing github webhook integration 2
-                echo Testing github webhook integration 3
-                echo Testing github webhook integration 4
-                '''
+                // The pipeline setup via the UI takes care of the Git checkout
+                echo "Source code checked out successfully."
             }
-        }
-        stage('Test') {
-             steps {
-                sh 'echo "Hello, This is Test stage"'
-            }            
-        }
-        stage('Deploy') {
-             steps {
-                sh 'echo "Hello, This is Deploy stage"'
-            }            
         }
 
     }
