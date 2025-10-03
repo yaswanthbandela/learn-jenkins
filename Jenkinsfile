@@ -42,13 +42,14 @@ pipeline {
                     env.appVersion = packageJson.version
                     echo "application version: ${env.appVersion}"
                     env.NEXUS_VERSION = env.appVersion
+                    echo "application version: ${env.NEXUS_VERSION}"
                 }
             }
         }
         stage('Testing') {
             steps {
-                echo env.NEXUS_VERSION
-                echo env.ARTIFACT_FILE_NAME
+                sh 'echo env.NEXUS_VERSION'
+                sh 'echo env.ARTIFACT_FILE_NAME'
                 // Add your test commands here, e.g., sh 'npm test'
             }
         }
