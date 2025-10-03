@@ -35,27 +35,36 @@ pipeline {
                 echo "Source code checked out successfully."
             }
         }
-        stage('Push Artifacts') {
-            steps {
-                script {
-                     nexusArtifactUploader(
-                        nexusVersion: 'nexus3',
-                        protocol: 'http',
-                        nexusUrl: NEXUS_URL,
-                        groupId: NEXUS_GROUP_ID,
-                        version: NEXUS_VERSION,
-                        repository: NEXUS_REPOSITORY_ID,
-                        credentialsId: NEXUS_CREDENTIALS_ID,
-                        artifacts: [
-                            [artifactId: NEXUS_ARTIFACT_ID,
-                                classifier: '',
-                                file: ARTIFACT_FILE_NAME,
-                                type: 'zip']
-                        ]
-                        )
+        stage('read the version'){
+            steps{
+                script{
+                    def packageJson = readJSON file: 'package.json'
+                    env.appVersion = packageJson.version
+                    echo "application version: ${env.appVersion}"
                 }
             }
         }
+        // stage('Push Artifacts') {
+        //     steps {
+        //         script {
+        //              nexusArtifactUploader(
+        //                 nexusVersion: 'nexus3',
+        //                 protocol: 'http',
+        //                 nexusUrl: NEXUS_URL,
+        //                 groupId: NEXUS_GROUP_ID,
+        //                 version: NEXUS_VERSION,
+        //                 repository: NEXUS_REPOSITORY_ID,
+        //                 credentialsId: NEXUS_CREDENTIALS_ID,
+        //                 artifacts: [
+        //                     [artifactId: NEXUS_ARTIFACT_ID,
+        //                         classifier: '',
+        //                         file: ARTIFACT_FILE_NAME,
+        //                         type: 'zip']
+        //                 ]
+        //                 )
+        //         }
+        //     }
+        // }
 
     }
     post {
