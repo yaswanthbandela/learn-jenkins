@@ -13,7 +13,7 @@ pipeline {
          NEXUS_URL = 'localhost:8081' 
          NEXUS_REPOSITORY_ID = 'backend-1' 
          NEXUS_GROUP_ID = 'com.expense'
-         NEXUS_VERSION = "1.0.${env.BUILD_NUMBER}"
+         NEXUS_VERSION = ""
 
          NEXUS_ARTIFACT_ID = 'backend'
          ARTIFACT_FILE_NAME = "${NEXUS_ARTIFACT_ID}-${NEXUS_VERSION}.zip" 
@@ -41,7 +41,14 @@ pipeline {
                     def packageJson = readJSON file: 'package.json'
                     env.appVersion = packageJson.version
                     echo "application version: ${env.appVersion}"
+                    env.NEXUS_VERSION = env.appVersion
                 }
+            }
+        }
+        stage('Testing') {
+            steps {
+                echo NEXUS_VERSION
+                // Add your test commands here, e.g., sh 'npm test'
             }
         }
         // stage('Push Artifacts') {
