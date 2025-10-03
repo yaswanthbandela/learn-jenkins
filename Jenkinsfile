@@ -57,6 +57,13 @@ pipeline {
                 // Add your test commands here, e.g., sh 'npm test'
             }
         }
+        stage('Build') {
+            steps {
+                sh """
+                ls -ltr
+                """
+            }
+        }
 
         // stage('Push Artifacts') {
         //     steps {
