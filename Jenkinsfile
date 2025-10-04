@@ -73,29 +73,29 @@ pipeline {
             }
         }
 
-        // stage('Push Artifacts') {
-        //     steps {
-        //         script {
-        //             nexusArtifactUploader(
-        //                 nexusVersion: 'nexus3',
-        //                 protocol: 'http',
-        //                 nexusUrl: NEXUS_URL,
-        //                 groupId: NEXUS_GROUP_ID,
-        //                 version: NEXUS_VERSION,
-        //                 repository: NEXUS_REPOSITORY_ID,
-        //                 credentialsId: NEXUS_CREDENTIALS_ID,
-        //                 artifacts: [
-        //                     [
-        //                         artifactId: NEXUS_ARTIFACT_ID,
-        //                         classifier: '',
-        //                         file: ARTIFACT_FILE_NAME,
-        //                         type: 'zip'
-        //                     ]
-        //                 ]
-        //             )
-        //         }
-        //     }
-        // }
+        stage('Push Artifacts') {
+            steps {
+                script {
+                    nexusArtifactUploader(
+                        nexusVersion: 'nexus3',
+                        protocol: 'http',
+                        nexusUrl: env.NEXUS_URL,
+                        groupId: env.NEXUS_GROUP_ID,
+                        version: env.NEXUS_VERSION,
+                        repository: env.NEXUS_REPOSITORY_ID,
+                        credentialsId: env.NEXUS_CREDENTIALS_ID,
+                        artifacts: [
+                            [
+                                artifactId: env.NEXUS_ARTIFACT_ID,
+                                classifier: '',
+                                file: env.ARTIFACT_FILE_NAME,
+                                type: 'zip'
+                            ]
+                        ]
+                    )
+                }
+            }
+        }
     }
 
     post {
