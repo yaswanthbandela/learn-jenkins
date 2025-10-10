@@ -112,9 +112,9 @@ pipeline {
                     
                     echo "Downloading artifact..."
                     curl -u ${NEXUS_USER}:${NEXUS_PASS}  -O ${DOWNLOAD_URL}
-
+                    rm -rf *
                     echo "Unzipping..."
-                    unzip -o ${env.ARTIFACT_FILE_NAME}
+                    unzip -o -q ${env.ARTIFACT_FILE_NAME}
 
                     echo "Starting/Restarting app using PM2..."
                     pm2 describe expense-app > /dev/null 2>&1
