@@ -109,10 +109,10 @@ pipeline {
                     sh """
                     mkdir -p ${DEPLOY_DIR}
                     cd ${DEPLOY_DIR}
-                    
+                    rm -rf *
                     echo "Downloading artifact..."
                     curl -u ${NEXUS_USER}:${NEXUS_PASS}  -O ${DOWNLOAD_URL}
-                    rm -rf *
+                    
                     echo "Unzipping..."
                     unzip -o -q ${env.ARTIFACT_FILE_NAME}
 
