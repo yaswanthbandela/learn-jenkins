@@ -96,6 +96,39 @@ pipeline {
                 }
             }
         }
+        stage('Deploy Application') {
+            steps {
+                script {
+                    def DEPLOY_DIR = "/home/yaswanth/expense-app"
+                    def DOWNLOAD_URL = "http://${env.NEXUS_URL}/repository/${env.NEXUS_REPOSITORY_ID}/${env.NEXUS_GROUP_ID.replace('.', '/')}/${env.NEXUS_ARTIFACT_ID}/${env.NEXUS_VERSION}/${env.ARTIFACT_FILE_NAME}"
+
+                    echo "Deploying from Nexus: ${DOWNLOAD_URL}"
+
+                    sh """
+                    mkdir -p ${DEPLOY_DIR}
+                    cd ${DEPLOY_DIR}
+                    
+                    echo "Downloading artifact..."
+                    curl -O ${DOWNLOAD_URL}
+
+                    echo "Unzipping..."
+                    unzip -o ${env.ARTIFACT_FILE_NAME}
+
+                    echo "Starting/Restarting app using PM2..."
+                    pm2 describe expense-app > /dev/null 2>&1
+                    if [ \$? -eq 0 ]; then
+                        echo "App already running — restarting..."
+                        pm2 restart expense-app
+                    else
+                        echo "Starting app for the first time..."
+                        pm2 start index.js --name expense-app
+                    fi
+
+                    pm2 save
+                    """
+                }
+            }
+        }
     }
 
     post {
