@@ -99,7 +99,7 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 script {
-                    def DEPLOY_DIR = "/home/yaswanth/expense-app"
+                    def DEPLOY_DIR = "/opt/expense-app"
                     def DOWNLOAD_URL = "http://${env.NEXUS_URL}/repository/${env.NEXUS_REPOSITORY_ID}/${env.NEXUS_GROUP_ID.replace('.', '/')}/${env.NEXUS_ARTIFACT_ID}/${env.NEXUS_VERSION}/${env.ARTIFACT_FILE_NAME}"
 
                     echo "Deploying from Nexus: ${DOWNLOAD_URL}"
