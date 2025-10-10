@@ -103,13 +103,15 @@ pipeline {
                     def DOWNLOAD_URL = "http://${env.NEXUS_URL}/repository/${env.NEXUS_REPOSITORY_ID}/${env.NEXUS_GROUP_ID.replace('.', '/')}/${env.NEXUS_ARTIFACT_ID}/${env.NEXUS_VERSION}/${env.ARTIFACT_FILE_NAME}"
 
                     echo "Deploying from Nexus: ${DOWNLOAD_URL}"
-
+                     withCredentials([usernamePassword(credentialsId: env.NEXUS_CREDENTIALS_ID, 
+                                                      usernameVariable: 'NEXUS_USER', 
+                                                      passwordVariable: 'NEXUS_PASS')]){
                     sh """
                     mkdir -p ${DEPLOY_DIR}
                     cd ${DEPLOY_DIR}
                     
                     echo "Downloading artifact..."
-                    curl -O ${DOWNLOAD_URL}
+                    curl -u ${NEXUS_USER}:${NEXUS_PASS}  -O ${DOWNLOAD_URL}
 
                     echo "Unzipping..."
                     unzip -o ${env.ARTIFACT_FILE_NAME}
@@ -126,6 +128,7 @@ pipeline {
 
                     pm2 save
                     """
+                                                      }
                 }
             }
         }
