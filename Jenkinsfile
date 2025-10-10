@@ -117,8 +117,8 @@ pipeline {
                     unzip -o -q ${env.ARTIFACT_FILE_NAME}
 
                     echo "Starting/Restarting app using PM2..."
-                    pm2 describe expense-app > /dev/null 2>&1
-                    if [ \$? -eq 0 ]; then
+                    
+                    if pm2 describe expense-app > /dev/null 2>&1; then
                         echo "App already running — restarting..."
                         pm2 restart expense-app
                     else
