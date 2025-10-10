@@ -105,7 +105,7 @@ pipeline {
                     echo "Deploying from Nexus: ${DOWNLOAD_URL}"
 
                     sh """
-                    sudo mkdir -p ${DEPLOY_DIR}
+                    mkdir -p ${DEPLOY_DIR}
                     cd ${DEPLOY_DIR}
                     
                     echo "Downloading artifact..."
